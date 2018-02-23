@@ -44,7 +44,7 @@ public class ShortUrlServer {
 		}
 		String processUrl(String url) {
 			// TODO Auto-generated method stub
-			return ShortUrl.getShortUrl(url);
+			return ShortUrl2.getShortUrl(url);
 		}
 		private BigInteger factorial(int num) {
 			BigInteger  res=new BigInteger(num--+"");
@@ -58,7 +58,7 @@ public class ShortUrlServer {
 		@Override
 		String processUrl(String url) {
 			// TODO Auto-generated method stub
-			return ShortUrl.getOriginalUrl(url);
+			return ShortUrl2.getOriginalUrl(url);
 		}
 		
 		@Override
@@ -81,13 +81,12 @@ public class ShortUrlServer {
 		try {
 			// if port 80 is used then no need to specify port number in browser address bar 
 			server = HttpServer.create(new InetSocketAddress(8000),0);
-			server.createContext("/applications/shortenurl", new ShortUrlServer().new MyHandler());
-			server.createContext("/applications/expandurl", new ShortUrlServer().new ExpandHandler());
+			server.createContext("/applications/shorten", new ShortUrlServer().new MyHandler());
+			server.createContext("/applications/expand", new ShortUrlServer().new ExpandHandler());
 			server.setExecutor(null); // creates a default executor
 			server.start();
-			System.out.println("Use this URL to shorten: http://localhost:8000/applications/shortenurl?url=<URL HERE>");
-			System.out.println("Use this URL to expand: http://localhost:8000/applications/exapandurl?url=<URL HERE>");
-
+			System.out.println("Use this URL to shorten: http://localhost:8000/applications/shorten?url=<URL HERE>");
+			System.out.println("Use this URL to expand: http://localhost:8000/applications/exapand?url=<URL HERE>");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
